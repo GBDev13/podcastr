@@ -7,8 +7,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 
-import styles from './home.module.scss';
 import { usePlayer } from "../contexts/PlayerContext";
+import { Container } from "../styles/HomeStyles";
+
+import { BsFillPlayFill } from 'react-icons/bs';
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 type Episode = {
   id: string;
@@ -31,13 +35,15 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
 
   const episodeList = [...latestEpisodes, ...allEpisodes]
 
+  const { colors, title } = useContext(ThemeContext);
+
   return (
-      <div className={styles.homepage}>
+      <Container>
         <Head>
           <title>Home | Podcastr</title>
         </Head>
 
-        <section className={styles.lastedEpisodes}>
+        <section className="lastedEpisodes">
           <h2>Últimos lançamentos</h2>
 
           <ul>
@@ -51,24 +57,24 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
                   objectFit="cover"
                 />
 
-                <div className={styles.episodeDetails}>
+                <div className="episodeDetails">
                   <Link href={`/episodes/${episode.id}`}>
                     <a>{episode.title}</a>
                   </Link>
-                  <p>{episode.members}</p>
+                  <p className={title === 'dark' ? 'isDark' : ''}>{episode.members}</p>
                   <span>{episode.publishedAt}</span>
                   <span>{episode.durationAsString}</span>
                 </div>
 
                 <button type="button" onClick={() => playList(episodeList, index)}>
-                  <img src="/play-green.svg" alt="Tocar episódio"/>
+                <BsFillPlayFill color={colors.buttoninside} size={20} title="Tocar episódio" />
                 </button>
               </li>
             ))}
           </ul>
         </section>
 
-        <section className={styles.allEpisodes}>
+        <section className="allEpisodes">
           <h2>Todos episódios</h2>
           
           <table cellSpacing={0}>
@@ -99,20 +105,49 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
                       <a>{episode.title}</a>
                     </Link>
                   </td>
-                  <td>{episode.members}</td>
+                  <td className={title === 'dark' ? 'isDark' : ''}>{episode.members}</td>
                   <td style={{width: 100}}>{episode.publishedAt}</td>
                   <td>{episode.durationAsString}</td>
                   <td>
                     <button type="button" onClick={() => playList(episodeList, index + latestEpisodes.length)}>
-                      <img src="/play-green.svg" alt="Tocar episódio"/>
+                    <BsFillPlayFill color={colors.buttoninside} size={17} title="Tocar episódio" />
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          <ul className="responsiveEpisodes">
+            {allEpisodes.map((episode, index) => (
+              <li key={episode.id}>
+               <Image
+                  width={192}
+                  height={192}
+                  src={episode.thumbnail}
+                  alt={episode.title}
+                  objectFit="cover"
+                  className="image"
+                />
+
+                <div className="episodeDetails">
+                  <Link href={`/episodes/${episode.id}`}>
+                    <a>{episode.title}</a>
+                  </Link>
+                  <p className={title === 'dark' ? 'isDark' : ''}>{episode.members}</p>
+                  <span>{episode.publishedAt}</span>
+                  <span>{episode.durationAsString}</span>
+                </div>
+
+                <button type="button" onClick={() => playList(episodeList, index)}>
+                <BsFillPlayFill color={colors.buttoninside} size={20} title="Tocar episódio" />
+                </button>
+              </li>
+            ))}
+          </ul>
+
         </section>
-      </div>
+      </Container>
   )
 }
 

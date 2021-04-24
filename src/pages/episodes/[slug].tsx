@@ -7,8 +7,8 @@ import Image from 'next/image';
 import Link from "next/link";
 import Head from "next/head";
 
-import styles from './episode.module.scss';
 import { usePlayer } from "../../contexts/PlayerContext";
+import { Container } from "../../styles/EpisodeStyles";
 
 type Episode = {
   id: string;
@@ -30,12 +30,12 @@ export default function Episode({ episode } : EpisodeProps) {
   const { play } = usePlayer()
 
   return (
-    <div className={styles.episode}>
+    <Container>
       <Head>
         <title>{episode.title} | Podcastr</title>
       </Head>
 
-      <div className={styles.thumbnailContainer}>
+      <div className="thumbnailContainer">
         <Link href="/">
           <button type="button">
             <img src="/arrow-left.svg" alt="Voltar"/>
@@ -60,10 +60,10 @@ export default function Episode({ episode } : EpisodeProps) {
       </header>
 
       <div
-        className={styles.description}
+        className="description"
         dangerouslySetInnerHTML={{ __html: episode.description}}
       />
-    </div>
+    </Container>
   )
 }
 

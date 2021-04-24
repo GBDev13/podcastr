@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
+import { useMediaQuery } from 'react-responsive'
 
 type Episode = {
   title: string;
@@ -14,6 +15,7 @@ type PlayerContextData = {
   isPlaying: boolean;
   isLooping: boolean;
   isShuffling: boolean;
+  isMenuVisible: boolean;
   play: (episode: Episode) => void;
   playList: (list: Episode[], index: number) => void;
   setPlayingState: (state: boolean) => void;
@@ -23,6 +25,7 @@ type PlayerContextData = {
   playNext: () => void;
   playPrevious: () => void;
   clearPlayerState: () => void;
+  setIsMenuVisible: (boolean) => void;
   hasNext: boolean;
   hasPrevious: boolean;
 }
@@ -40,16 +43,22 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps) 
   const [isLooping, setIsLooping] = useState(false);
   const [isShuffling, setIsShuffling] = useState(false);
 
+  const [isMenuVisible, setIsMenuVisible] = useState (false);
+
+  const isResponsive = useMediaQuery({ query: '(max-width: 1325px)' })
+
   function play(episode: Episode) {
     setEpisodeList([episode])
     setCurrentEpisodeIndex(0);
     setIsPlaying(true)
+    setIsMenuVisible(true)
   }
 
   function playList(list: Episode[], index: number) {
     setEpisodeList(list)
     setCurrentEpisodeIndex(index)
     setIsPlaying(true)
+    setIsMenuVisible(true)
   }
 
   function togglePlay() {
@@ -109,6 +118,8 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps) 
       hasPrevious,
       toggleShuffle,
       clearPlayerState,
+      isMenuVisible,
+      setIsMenuVisible,
       isShuffling
     }}>
       {children}

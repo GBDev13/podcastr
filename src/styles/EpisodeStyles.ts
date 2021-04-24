@@ -1,4 +1,6 @@
-.episode {
+import styled from 'styled-components';
+
+export const Container = styled.div`
   max-width: 45rem;
   padding: 3rem 2rem;
   margin: 0 auto;
@@ -24,14 +26,14 @@
       &:first-child {
         left: 0;
         top: 50%;
-        background: var(--purple-500);
+        background: ${({theme}) => theme.colors.purple500};;
         transform: translate(-50%, -50%);
       }
 
       &:last-child {
         right: 0;
         top: 50%;
-        background: var(--green-500);
+        background: ${({theme}) => theme.colors.pink};;
         transform: translate(50%, -50%);
       }
 
@@ -43,7 +45,7 @@
 
   header {
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--gray-100);
+    border-bottom: 1px solid ${({theme}) => theme.colors.gray100};
 
     h1 {
       margin-top: 2rem;
@@ -77,10 +79,10 @@
   .description {
     margin-top: 2rem;
     line-height: 1.675rem;
-    color: var(--gray-800);
+    color: ${({theme}) => theme.colors.gray800};;
 
     p {
       margin: 1.5rem 0;
     }
   }
-}
+`;
