@@ -5,10 +5,11 @@ import Slider from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
-import { Buttons, Container, Overlay } from './PlayerStyles';
+import { Buttons, CloseMenu, Container, Overlay } from './PlayerStyles';
 import { ThemeContext } from 'styled-components';
 
 import { BsFillPlayFill } from 'react-icons/bs';
+import { CgPlayStopO, CgCloseO } from 'react-icons/cg';
 
 export function Player() {
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -30,7 +31,7 @@ export function Player() {
     isShuffling,
     clearPlayerState,
     isMenuVisible,
-    setIsMenuVisible
+    setIsMenuVisible,
   } = usePlayer()
 
   useEffect(() => {
@@ -66,14 +67,22 @@ export function Player() {
     }
   }
 
+  function closeMenu() {
+    setIsMenuVisible(false)
+    console.log(isMenuVisible)
+  }
+
   const episode = episodeList[currentEpisodeIndex]
 
   const { colors } = useContext(ThemeContext);
-
   return (
     <>
     <Overlay onClick={() => setIsMenuVisible(false)} className={isMenuVisible ? 'active' : ''}/>
+    <CloseMenu onClick={closeMenu} className={isMenuVisible ? 'active' : ''}>
+      <p><CgCloseO color={colors.blue}/>Fechar o player</p>
+    </CloseMenu>
       <Container onClick={() => setIsMenuVisible(true)} className={isMenuVisible ? 'active' : ''}>
+
         <header>
           <img src="/playing.svg" alt="Tocando agora"/>
           <strong>Tocando Agora</strong>

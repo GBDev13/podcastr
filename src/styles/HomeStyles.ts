@@ -27,6 +27,10 @@ export const Container = styled.div`
     margin-right: 0;
   }
 
+  @media(max-width: 400px) {
+    height: 100vh;
+  }
+
   h2{
     margin-top: 3rem;
     margin-bottom: 1.5rem;  
@@ -102,7 +106,6 @@ export const Container = styled.div`
             font-size: 0.875rem;
             margin-top: 0.5rem;
             max-width: 70%;
-            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
 

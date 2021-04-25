@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 45rem;
-  padding: 3rem 2rem;
-  margin: 0 auto;
+  height: calc(100vh - 6.5rem);
+  margin-right: 26rem;
+  overflow-y: scroll;
+
+  > section {
+    max-width: 45rem;
+    padding: 3rem 2rem;
+    margin: 0 auto;
+    height: 100%;
+  }
 
   .thumbnailContainer {
     position: relative;
@@ -85,4 +92,31 @@ export const Container = styled.div`
       margin: 1.5rem 0;
     }
   }
+
+  @media(max-width:1450px) {
+    margin-right: 21rem;
+  }
+
+  @media(max-width:1325px) {
+    margin-right: 8.5rem;
+
+    header {
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  @media(max-width: 1050px) {
+    margin-right: 7.7rem;
+  }
+
+  @media(max-width:720px){
+    margin-right: 6.7rem;
+  }
+
+  @media(max-width:550px){
+    margin-right: 0;
+  }
+
 `;

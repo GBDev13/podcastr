@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Overlay = styled.div`
   width:100vw;
@@ -23,6 +23,41 @@ export const Overlay = styled.div`
 
 `;
 
+export const CloseMenu = styled.div`
+  z-index: 55;
+  cursor: pointer;
+  display:none;
+  transition: .5s;
+
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%); 
+  top: -6rem;
+
+  @media(max-width: 380px) {
+    display:flex;
+  }
+
+
+  @media(max-width: 350px) {
+    left: 55%;
+    transform: translateX(-60%); 
+  }
+
+  p {
+    color: #fff;
+  }
+
+  svg {
+    margin-right: .5rem;
+  }
+
+  &.active {
+    top: 4.5rem;
+  }
+
+`;
+
 export const Container = styled.div`
   width: 26rem;
   height: 100vh;
@@ -30,6 +65,8 @@ export const Container = styled.div`
   position: fixed;
   right: 0;
   cursor:initial;
+  transition: 1s;
+  z-index: 50;
 
   @media(max-width:1450px) {
     padding: 1.5rem;
@@ -54,7 +91,7 @@ export const Container = styled.div`
 
   @media(max-width:550px) {
     right: 0px;
-    transform: translateX(100vw);
+    transform: translateX(120vw);
     width: 70%;
     filter: blur(0);
 
@@ -62,6 +99,11 @@ export const Container = styled.div`
     transform: translateX(0vw);
     }
   }
+
+  @media(max-width:380px) {
+    width: 100%;
+    height: 100%;
+  } 
 
   background: ${({theme}) => theme.colors.gradientbg};
   color: #fff;

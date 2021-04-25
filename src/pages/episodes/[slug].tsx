@@ -35,34 +35,36 @@ export default function Episode({ episode } : EpisodeProps) {
         <title>{episode.title} | Podcastr</title>
       </Head>
 
-      <div className="thumbnailContainer">
-        <Link href="/">
-          <button type="button">
-            <img src="/arrow-left.svg" alt="Voltar"/>
+      <section>
+        <div className="thumbnailContainer">
+          <Link href="/">
+            <button type="button">
+              <img src="/arrow-left.svg" alt="Voltar"/>
+            </button>
+          </Link>
+          <Image
+            width={700}
+            height={160}
+            src={episode.thumbnail}
+            objectFit="cover"
+          />
+          <button type="button" onClick={() => play(episode)}>
+            <img src="/play.svg" alt="Tocar episódio"/>
           </button>
-        </Link>
-        <Image
-          width={700}
-          height={160}
-          src={episode.thumbnail}
-          objectFit="cover"
+        </div>
+
+        <header>
+          <h1>{episode.title}</h1>
+          <span>{episode.members}</span>
+          <span>{episode.publishedAt}</span>
+          <span>{episode.durationAsString}</span>
+        </header>
+
+        <div
+          className="description"
+          dangerouslySetInnerHTML={{ __html: episode.description}}
         />
-        <button type="button" onClick={() => play(episode)}>
-          <img src="/play.svg" alt="Tocar episódio"/>
-        </button>
-      </div>
-
-      <header>
-        <h1>{episode.title}</h1>
-        <span>{episode.members}</span>
-        <span>{episode.publishedAt}</span>
-        <span>{episode.durationAsString}</span>
-      </header>
-
-      <div
-        className="description"
-        dangerouslySetInnerHTML={{ __html: episode.description}}
-      />
+      </section>
     </Container>
   )
 }

@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { useMediaQuery } from 'react-responsive'
 
 type Episode = {
   title: string;
@@ -44,8 +43,6 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps) 
   const [isShuffling, setIsShuffling] = useState(false);
 
   const [isMenuVisible, setIsMenuVisible] = useState (false);
-
-  const isResponsive = useMediaQuery({ query: '(max-width: 1325px)' })
 
   function play(episode: Episode) {
     setEpisodeList([episode])
@@ -120,7 +117,7 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps) 
       clearPlayerState,
       isMenuVisible,
       setIsMenuVisible,
-      isShuffling
+      isShuffling,
     }}>
       {children}
     </PlayerContext.Provider>

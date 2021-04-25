@@ -2,6 +2,7 @@ export default {
   title: 'light',
 
   colors: {
+    white: '#AFB2B1',
     card: '#FFF',
 
     gray50: '#F7F8FA',
